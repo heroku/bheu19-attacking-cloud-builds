@@ -1,3 +1,7 @@
+#
+# Also check out TravisCI Debug Builds with SSH access: https://docs.travis-ci.com/user/running-build-in-debug-mode/
+#
+
 language: python
 
 services:
