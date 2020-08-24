@@ -2,7 +2,8 @@
 
 This repository contains material and slides for the talk [Reverse Engineering and Exploiting Builds in the Cloud](https://www.blackhat.com/eu-19/briefings/schedule/index.html#reverse-engineering-and-exploiting-builds-in-the-cloud-17287): 
 * [cheatsheet.md](cheatsheet.md) contains multiple commands, Dockerfiles, YML configs that can assist you in your build environment reversing.
-* [slides.pdf](slides.pdf) are the presentation slides. 
+* [slides.pdf](slides.pdf) are the presentation slides.
+* [Recording](https://www.youtube.com/watch?v=g6dtjtYOw2w)
 
 ## References
 This research would not be possible without the contribution and effort from others in the field. Here are a list of resources that have helped us.
